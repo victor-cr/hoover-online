@@ -7,7 +7,7 @@
     <version>0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>hoover-parent</name>
+    <name>Hoover Parent Module</name>
     <url>https://github.com/victor-cr/hoover-online</url>
 
     <modules>
@@ -16,6 +16,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <version.antlr>3.4</version.antlr>
     </properties>
 
     <build>
@@ -31,4 +32,23 @@
             </plugin>
         </plugins>
     </build>
+
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.9</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.antlr</groupId>
+                <artifactId>antlr-runtime</artifactId>
+                <version>${version.antlr}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 </project>
