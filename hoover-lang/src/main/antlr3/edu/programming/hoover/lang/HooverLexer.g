@@ -9,6 +9,32 @@ options {
     package edu.programming.hoover.lang;
 }
 
+PROGRAM     : 'program' ;
+END         : 'end' ;
+LOOP        : 'loop' ;
+WHILE       : 'while' ;
+IF          : 'if' ;
+THEN        : 'then' ;
+CAN         : 'can' ;
+MATCH       : 'match' ;
+MOVE        : 'move' ;
+DIR_LEFT    : 'left' ;
+DIR_RIGHT   : 'right' ;
+DIR_UP      : 'up' ;
+DIR_DOWN    : 'down' ;
+PUT         : 'put' ;
+TAKE        : 'take' ;
+EMPTY       : 'empty' ;
+FULL        : 'full' ;
+AND         : 'and' ;
+OR          : 'or' ;
+NOT         : 'not' ;
+LEFT_PAR    : '(' ;
+RIGHT_PAR   : ')' ;
+
+END_IF      : END IF ;
+END_LOOP    : END LOOP ;
+
 fragment BIN_DIGIT
          : '0'
          | '1'
@@ -74,7 +100,6 @@ fragment SYMBOL
 TERMINATOR  : ';' ;
 WHITESPACE  : (' ' | '\t' | '\n' | '\r' | '\u000c')+ { $channel = HIDDEN; } ;
 LITERAL     : QUOTE ( LETTER | WHITESPACE | DEC_DIGIT | SYMBOL )* QUOTE ;
-PROGRAM     : 'program' ;
 
 INTEGER     : BIN_DIGIT+ BIN_SUFFIX
             | OCT_DIGIT+ OCT_SUFFIX
