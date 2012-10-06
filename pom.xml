@@ -13,12 +13,14 @@
     <modules>
         <module>hoover-core</module>
         <module>hoover-lang</module>
+        <module>hoover-web</module>
     </modules>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <version.antlr>3.4</version.antlr>
         <version.slf4j>1.7.0</version.slf4j>
+        <version.spring>3.1.2.RELEASE</version.spring>
     </properties>
 
     <build>
@@ -26,6 +28,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.5.1</version>
                 <configuration>
                     <target>1.7</target>
                     <source>1.7</source>
@@ -63,6 +66,26 @@
                 <version>${project.version}</version>
             </dependency>
             <dependency>
+                <groupId>edu.programming.hoover</groupId>
+                <artifactId>hoover-lang</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-beans</artifactId>
+                <version>${version.spring}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-web</artifactId>
+                <version>${version.spring}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.directwebremoting</groupId>
+                <artifactId>dwr</artifactId>
+                <version>2.0.10</version>
+            </dependency>
+            <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-api</artifactId>
                 <version>${version.slf4j}</version>
@@ -76,6 +99,12 @@
                 <groupId>org.antlr</groupId>
                 <artifactId>antlr-runtime</artifactId>
                 <version>${version.antlr}</version>
+            </dependency>
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>servlet-api</artifactId>
+                <version>2.5</version>
+                <scope>provided</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
