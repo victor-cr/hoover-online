@@ -1,0 +1,16 @@
+program 'HooverConditionTest'
+
+while can left and match loop
+	if cell empty and not bag empty then
+		put
+	elseif not cell empty then
+	    move left up
+	    stop
+	end if
+
+	if cell full and not bag full then
+		take
+    else
+        stop
+	end if
+end loop

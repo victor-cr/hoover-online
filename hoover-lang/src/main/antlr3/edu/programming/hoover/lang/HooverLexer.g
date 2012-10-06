@@ -10,11 +10,14 @@ options {
 }
 
 PROGRAM     : 'program' ;
+STOP        : 'stop' ;
 END         : 'end' ;
 LOOP        : 'loop' ;
 WHILE       : 'while' ;
 IF          : 'if' ;
 THEN        : 'then' ;
+ELSE        : 'else' ;
+ELSEIF      : 'elseif' ;
 CAN         : 'can' ;
 MATCH       : 'match' ;
 MOVE        : 'move' ;
@@ -24,6 +27,8 @@ DIR_UP      : 'up' ;
 DIR_DOWN    : 'down' ;
 PUT         : 'put' ;
 TAKE        : 'take' ;
+BAG         : 'bag' ;
+CELL        : 'cell' ;
 EMPTY       : 'empty' ;
 FULL        : 'full' ;
 AND         : 'and' ;
@@ -31,9 +36,17 @@ OR          : 'or' ;
 NOT         : 'not' ;
 LEFT_PAR    : '(' ;
 RIGHT_PAR   : ')' ;
-
-END_IF      : END IF ;
-END_LOOP    : END LOOP ;
+CMP_GE      : '>=' ;
+CMP_LE      : '<=' ;
+CMP_NE      : '<>' ;
+CMP_EQ      : '=' ;
+CMP_GT      : '>' ;
+CMP_LT      : '<' ;
+PLUS        : '+' ;
+MUL         : '*' ;
+MINUS       : '-' ;
+DIV         : '/' ;
+MOD         : '%' ;
 
 fragment BIN_DIGIT
          : '0'
@@ -97,7 +110,6 @@ fragment SYMBOL
          | ':'
          ;
 
-TERMINATOR  : ';' ;
 WHITESPACE  : (' ' | '\t' | '\n' | '\r' | '\u000c')+ { $channel = HIDDEN; } ;
 LITERAL     : QUOTE ( LETTER | WHITESPACE | DEC_DIGIT | SYMBOL )* QUOTE ;
 

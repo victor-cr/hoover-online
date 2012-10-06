@@ -1,0 +1,5 @@
+program 'HooverArithmeticTest'
+
+if (1 + 2 * 3 > (3 + 2) * 1) and 11 <> 12 - 4 then
+    move left
+end if

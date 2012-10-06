@@ -5,42 +5,63 @@ options {
     output     = AST;
     superClass = AbstractHooverParser;
     tokenVocab = HooverLexer;
+    backtrack  = true;
 }
 
 @header {
     package edu.programming.hoover.lang;
 }
 
-parseApplication : header body EOF ;
+parseApplication : header? block EOF ;
 
-header           : programCommand programName eol ;
-
-programCommand   : PROGRAM ;
+header           : PROGRAM^ programName ;
 
 programName      : LITERAL ;
 
-eol              : TERMINATOR ;
+block            : ( operation | ifStatement | loopStatement )* ;
 
-body             : ( operation | check | loop )+ ;
-
-operation        : (( MOVE direction ) | TAKE | PUT ) eol;
+operation        : ( MOVE^ direction+ ) | TAKE | PUT | STOP ;
 
 direction        : DIR_LEFT | DIR_RIGHT | DIR_UP | DIR_DOWN ;
 
-check            : IF condition THEN body END_IF ;
+ifStatement      : ifBlock thenBlock ( elseBlock )? END! IF! ;
 
-loop             : WHILE condition LOOP body END_LOOP ;
+ifBlock          : IF^ condition ;
 
-condition        : andCheck ;
+elseifBlock      : ELSEIF^ condition ;
 
-andCheck         : orCheck (AND orCheck)* ;
+thenBlock        : THEN^ block ;
 
-orCheck          : complexCheck (OR complexCheck)* ;
+elseBlock        : ( ELSE^ block ) | ( elseIfBlock thenBlock )+ ;
 
-complexCheck     : atomicCheck | ( LEFT_PAR condition RIGHT_PAR ) ;
+elseIfBlock      : ELSEIF^ condition ;
 
-atomicCheck      : MATCH | ( CAN direction ) ;
+loopStatement    : whileBlock loopBlock END! LOOP! ;
 
-/*
-negativeCheck    : NOT positiveBoolean ;
-*/
+whileBlock       : WHILE^ condition ;
+
+loopBlock        : LOOP^ block ;
+
+condition        : orCondition ;
+
+orCondition      : andCondition ( OR^ andCondition )* ;
+
+andCondition     : notCondition ( AND^ notCondition )* ;
+
+notCondition     : ( NOT^ )? complexCondition ;
+
+complexCondition : atomicCondition | ( LEFT_PAR! condition RIGHT_PAR! ) ;
+
+atomicCondition  : MATCH | ( CAN^ direction+ ) | ( ( CELL | BAG )^ ( FULL | EMPTY ) ) | comparison ;
+
+comparison       : arithmetic ( CMP_GE | CMP_LE | CMP_NE | CMP_EQ | CMP_GT | CMP_LT )^ arithmetic ;
+
+arithmetic       : modResult ;
+
+modResult        : plusMinusResult ( MOD^ plusMinusResult )? ;
+
+plusMinusResult  : mulDivResult ( ( PLUS | MINUS )^ mulDivResult )* ;
+
+mulDivResult     : number ( ( MUL | DIV )^ number )* ;
+
+number           : INTEGER | ( LEFT_PAR! arithmetic RIGHT_PAR! ) ;
