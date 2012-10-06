@@ -8,6 +8,12 @@ options {
     backtrack  = true;
 }
 
+tokens {
+    ARITHMETIC ;
+    BLOCK ;
+    CONDITION ;
+}
+
 @header {
     package edu.programming.hoover.lang;
 }
@@ -20,11 +26,11 @@ programName      : LITERAL ;
 
 block            : ( operation | ifStatement | loopStatement )* ;
 
-operation        : ( MOVE^ direction+ ) | TAKE | PUT | STOP ;
+operation        : ( MOVE^ direction ) | TAKE | PUT | STOP ;
 
 direction        : DIR_LEFT | DIR_RIGHT | DIR_UP | DIR_DOWN ;
 
-ifStatement      : ifBlock thenBlock ( elseBlock )? END! IF! ;
+ifStatement      : ifBlock thenBlock elseBlock? END IF -> ^( BLOCK ifBlock thenBlock elseBlock? );
 
 ifBlock          : IF^ condition ;
 
@@ -36,7 +42,7 @@ elseBlock        : ( ELSE^ block ) | ( elseIfBlock thenBlock )+ ;
 
 elseIfBlock      : ELSEIF^ condition ;
 
-loopStatement    : whileBlock loopBlock END! LOOP! ;
+loopStatement    : whileBlock loopBlock END LOOP -> ^( BLOCK whileBlock loopBlock );
 
 whileBlock       : WHILE^ condition ;
 
@@ -52,7 +58,7 @@ notCondition     : ( NOT^ )? complexCondition ;
 
 complexCondition : atomicCondition | ( LEFT_PAR! condition RIGHT_PAR! ) ;
 
-atomicCondition  : MATCH | ( CAN^ direction+ ) | ( ( CELL | BAG )^ ( FULL | EMPTY ) ) | comparison ;
+atomicCondition  : MATCH | ( CAN^ direction ) | ( ( CELL | BAG )^ ( FULL | EMPTY ) ) | comparison ;
 
 comparison       : arithmetic ( CMP_GE | CMP_LE | CMP_NE | CMP_EQ | CMP_GT | CMP_LT )^ arithmetic ;
 

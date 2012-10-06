@@ -11,12 +11,14 @@
     <url>https://github.com/victor-cr/hoover-online</url>
 
     <modules>
+        <module>hoover-core</module>
         <module>hoover-lang</module>
     </modules>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <version.antlr>3.4</version.antlr>
+        <version.slf4j>1.7.0</version.slf4j>
     </properties>
 
     <build>
@@ -25,8 +27,8 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <target>1.6</target>
-                    <source>1.6</source>
+                    <target>1.7</target>
+                    <source>1.7</source>
                     <encoding>${project.build.sourceEncoding}</encoding>
                 </configuration>
             </plugin>
@@ -34,6 +36,17 @@
     </build>
 
     <dependencies>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${version.slf4j}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>${version.slf4j}</version>
+            <scope>test</scope>
+        </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -44,6 +57,21 @@
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>edu.programming.hoover</groupId>
+                <artifactId>hoover-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${version.slf4j}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-simple</artifactId>
+                <version>${version.slf4j}</version>
+            </dependency>
             <dependency>
                 <groupId>org.antlr</groupId>
                 <artifactId>antlr-runtime</artifactId>

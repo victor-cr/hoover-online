@@ -17,61 +17,52 @@ import java.io.InputStream;
  * @since 05/10/12 14:02
  */
 public class HooverParserTest extends Assert {
-    private final HooverLexer hooverLexer = new HooverLexer();
-    private final TokenStream hooverTokenStream = new CommonTokenStream(hooverLexer);
-    private final HooverParser hooverParser = new HooverParser(hooverTokenStream);
 
-    @Test(expected = MismatchedTokenException.class)
+    @Test
     public void testParserSingleBinaryNumber() throws RecognitionException {
-        hooverLexer.setCharStream(new ANTLRStringStream("11b"));
+        Tree tree = getTree(getStringStream("11b"));
 
-        getTree();
+        assertEquals(0, tree.getChildCount());
     }
 
     @Test(expected = MismatchedTokenException.class)
     public void testParserHeaderWithoutLiteral() throws RecognitionException {
-        hooverLexer.setCharStream(new ANTLRStringStream("program asd"));
-
-        getTree();
+        getTree(getStringStream("program asd"));
     }
 
     @Test
     public void testParserHeaderCorrect() throws RecognitionException {
-        hooverLexer.setCharStream(new ANTLRStringStream("program  'testing'"));
-
-        Tree tree = getTree();
+        Tree tree = getTree(getStringStream("program  'testing'"));
 
         assertEquals(2, tree.getChildCount());
     }
 
     @Test
     public void testParserBodyCorrect() throws RecognitionException {
-        hooverLexer.setCharStream(new ANTLRStringStream("program  'testing' while can left loop move left end loop if match then take end if"));
+        Tree tree = getTree(getStringStream("program  'testing' while can left loop move left end loop if match then take end if"));
 
-        Tree tree = getTree();
-
-        assertEquals(6, tree.getChildCount());
+        assertEquals(4, tree.getChildCount());
     }
 
     @Test
     public void testParserBodyComplexCondition() throws RecognitionException, IOException {
-        hooverLexer.setCharStream(getInputStream("edu/programming/hoover/lang/HooverCondition.txt"));
+        Tree tree = getTree(getInputStream("edu/programming/hoover/lang/HooverCondition.txt"));
 
-        Tree tree = getTree();
-
-        assertEquals(4, tree.getChildCount());
+        assertEquals(3, tree.getChildCount());
     }
 
     @Test
     public void testParserBodyArithmeticCondition() throws RecognitionException, IOException {
-        hooverLexer.setCharStream(getInputStream("edu/programming/hoover/lang/HooverArithmetic.txt"));
+        Tree tree = getTree(getInputStream("edu/programming/hoover/lang/HooverArithmetic.txt"));
 
-        Tree tree = getTree();
-
-        assertEquals(4, tree.getChildCount());
+        assertEquals(3, tree.getChildCount());
     }
 
-    private Tree getTree() throws RecognitionException {
+    private Tree getTree(CharStream stream) throws RecognitionException {
+        HooverLexer hooverLexer = new HooverLexer(stream);
+        TokenStream hooverTokenStream = new CommonTokenStream(hooverLexer);
+        HooverParser hooverParser = new HooverParser(hooverTokenStream);
+
         Tree tree = (Tree) hooverParser.parseApplication().getTree();
 
         assertTree(tree);
@@ -80,6 +71,10 @@ public class HooverParserTest extends Assert {
     }
 
     private static void assertTree(Tree tree) throws RecognitionException {
+        if (tree == null) {
+            return;
+        }
+
         if (tree instanceof CommonErrorNode) {
             throw ((CommonErrorNode) tree).trappedException;
         }
@@ -93,4 +88,7 @@ public class HooverParserTest extends Assert {
         return new ANTLRInputStream(HooverParserTest.class.getClassLoader().getResourceAsStream(inputStream));
     }
 
+    private static ANTLRStringStream getStringStream(String code) {
+        return new ANTLRStringStream(code);
+    }
 }
