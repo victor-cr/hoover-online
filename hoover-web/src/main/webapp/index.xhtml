@@ -2,12 +2,17 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
     <title>Hoover</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
     <link type="text/css" rel="stylesheet" href="css/ui-lightness/jquery-ui-1.8.24.custom.css"/>
+    <link type="text/css" rel="stylesheet" href="css/main.css"/>
 
     <script type="text/javascript" src="js/jquery/jquery-1.8.2.min.js"></script>
     <script type="text/javascript" src="js/jquery/jquery-ui-1.8.24.custom.min.js"></script>
+
+    <script type="text/javascript" src="js/Events.js"></script>
+    <script type="text/javascript" src="js/State.js"></script>
+    <script type="text/javascript" src="js/Field.js"></script>
 
     <script type="text/javascript" src="dwr/interface/HooverRemote.js"></script>
     <script type="text/javascript" src="dwr/engine.js"></script>
@@ -15,6 +20,7 @@
 </head>
 <body>
 
+<!--
 <label for="fieldWidth">Width</label>
 <input id="fieldWidth" type="text"/>
 <label for="fieldHeight">Height</label>
@@ -24,6 +30,20 @@
 <input id="hooverX" type="text"/>
 <label for="hooverY">Hoover Y</label>
 <input id="hooverY" type="text"/>
+-->
+<table id="layoutTable">
+    <tr>
+        <td id="programWrapper" class="column">
+            <label for="programContent">Type your program here: </label>
+            <textarea id="programContent" rows="25" cols="25"/>
+            <button id="sendProgram">Send</button>
+            <button id="randomFill">Random</button>
+        </td>
+        <td id="logWindow" class="column"/>
+        <td id="hooverFieldWrapper" class="column"/>
+        <td id="bagWindow" class="column"/>
+    </tr>
+</table>
 
 </body>
 </html>
