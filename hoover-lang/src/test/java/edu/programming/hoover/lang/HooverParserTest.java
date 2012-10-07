@@ -1,14 +1,18 @@
 package edu.programming.hoover.lang;
 
-import org.antlr.runtime.*;
+import org.antlr.runtime.ANTLRInputStream;
+import org.antlr.runtime.ANTLRStringStream;
+import org.antlr.runtime.CharStream;
+import org.antlr.runtime.CommonTokenStream;
+import org.antlr.runtime.MismatchedTokenException;
+import org.antlr.runtime.RecognitionException;
+import org.antlr.runtime.TokenStream;
 import org.antlr.runtime.tree.CommonErrorNode;
-import org.antlr.runtime.tree.CommonTree;
 import org.antlr.runtime.tree.Tree;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.IOException;
-import java.io.InputStream;
 
 /**
  * Java Doc here

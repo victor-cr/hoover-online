@@ -1,8 +1,5 @@
 package edu.programming.hoover.exception;
 
-import edu.programming.hoover.model.Bounds;
-import edu.programming.hoover.model.Position;
-
 /**
  * Created with IntelliJ IDEA.
  * User: id967092

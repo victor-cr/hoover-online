@@ -4,13 +4,8 @@ import edu.programming.hoover.Command;
 import edu.programming.hoover.State;
 import edu.programming.hoover.StateBuilder;
 import edu.programming.hoover.exception.BagOverflowHooverException;
-import edu.programming.hoover.exception.CellOverflowHooverException;
-import edu.programming.hoover.exception.EmptyBagHooverException;
-import edu.programming.hoover.exception.EmptyCellHooverException;
 import edu.programming.hoover.exception.OutOfBoundsHooverException;
 import edu.programming.hoover.exception.ParseHooverException;
-import edu.programming.hoover.model.Content;
-import edu.programming.hoover.model.Direction;
 import org.junit.Assert;
 import org.junit.Test;
 

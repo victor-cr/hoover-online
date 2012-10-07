@@ -1,11 +1,11 @@
 package edu.programming.hoover.web;
 
 import edu.programming.hoover.Command;
+import edu.programming.hoover.exception.BagOverflowHooverException;
+import edu.programming.hoover.exception.OutOfBoundsHooverException;
 import edu.programming.hoover.exception.ParseHooverException;
 import edu.programming.hoover.lang.CommandGenerator;
 import edu.programming.hoover.web.bean.StateBean;
-import org.directwebremoting.annotations.RemoteMethod;
-import org.directwebremoting.annotations.RemoteProxy;
 import org.springframework.beans.factory.annotation.Required;
 
 import java.util.ArrayList;
@@ -26,8 +26,8 @@ public class HooverRemoteService {
         this.commandGenerator = commandGenerator;
     }
 
-    public Collection<String> execute(StateBean stateBean, String code) throws ParseHooverException {
-        Collection<Command> commands = commandGenerator.generate(null, code);
+    public Collection<String> execute(StateBean stateBean, String code) throws ParseHooverException, OutOfBoundsHooverException, BagOverflowHooverException {
+        Collection<Command> commands = commandGenerator.generate(stateBean.toState(), code);
         Collection<String> textCommands = new ArrayList<>(commands.size());
 
         for (Command command : commands) {

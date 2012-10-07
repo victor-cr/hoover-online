@@ -6,7 +6,7 @@
        http://www.directwebremoting.org/schema/spring-dwr http://www.directwebremoting.org/schema/spring-dwr-2.0.xsd">
 
     <dwr:configuration>
-        <dwr:convert class="edu.programming.hoover.web.bean.StateBean" type="bean" javascript="State"/>
+        <dwr:convert class="edu.programming.hoover.web.bean.StateBean*" type="bean" javascript="State"/>
     </dwr:configuration>
 
     <bean id="hooverRemoteService" class="edu.programming.hoover.web.HooverRemoteService">
