@@ -34,9 +34,9 @@ textarea {
     overflow-y: scroll;
 }
 
-#logWindow ol {
-    vertical-align: top;
-    margin: 0;
+#logWindow textarea {
+    width: 100%;
+    height: 100%;
 }
 
 #bagWindow div {

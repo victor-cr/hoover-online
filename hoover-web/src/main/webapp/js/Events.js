@@ -32,12 +32,6 @@ $(document).ready(function() {
         var $log = $("#logWindow");
 
         HooverRemote.execute(window.hooverField.state, code, function(data) {
-            $log.children().remove();
-
-            var $ol = $("<ol/>");
-
-            $log.append($ol);
-
             window.hooverField.execute(0, data);
         });
     });

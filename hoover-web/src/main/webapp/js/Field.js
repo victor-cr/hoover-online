@@ -146,10 +146,8 @@ Field.prototype.execute = function (offset, commands) {
         return;
     }
 
-    var $ol = $("#logWindow ol");
-    var $li = $("<li/>").text(command);
-
-    $ol.append($li);
+    var $log = $("#logWindow textarea");
+    $log.text(command + "\n" + $log.text());
 
     switch (cmd) {
         case "U" :
@@ -180,7 +178,7 @@ Field.prototype.execute = function (offset, commands) {
 
     setTimeout(function () {
         self.execute(offset + 1, commands);
-    }, 1000);
+    }, 100);
 };
 
 /**

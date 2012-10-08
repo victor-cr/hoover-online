@@ -97,11 +97,13 @@ public class StateBuilder {
     }
 
     public StateBuilder setFieldRow(int row, Integer... items) {
-        for (int i = 0, itemsLength = items.length; i < itemsLength; i++) {
-            Integer item = items[i];
+        if (items != null) {
+            for (int i = 0, itemsLength = items.length; i < itemsLength; i++) {
+                Integer item = items[i];
 
-            if (item != null) {
-                field.put(new Position(i, row), item);
+                if (item != null) {
+                    field.put(new Position(i, row), item);
+                }
             }
         }
 

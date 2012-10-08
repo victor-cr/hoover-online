@@ -34,13 +34,11 @@ ifStatement      : ifBlock thenBlock elseBlock? END IF -> ^( BLOCK ifBlock thenB
 
 ifBlock          : IF^ condition ;
 
-elseifBlock      : ELSEIF^ condition ;
+elseIfBlock      : ELSEIF^ condition ;
 
 thenBlock        : THEN^ block ;
 
 elseBlock        : ( ELSE^ block ) | ( elseIfBlock thenBlock )+ ;
-
-elseIfBlock      : ELSEIF^ condition ;
 
 loopStatement    : whileBlock loopBlock END LOOP -> ^( BLOCK whileBlock loopBlock );
 
